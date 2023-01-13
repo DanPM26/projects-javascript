@@ -1,5 +1,8 @@
-function guardar(){
+const formulario = document.querySelector('#formulario')
+formulario.addEventListener('submit', guardar)
 
+function guardar(e){
+    e.preventDefault();
 let texto = document.getElementById('textotxt').value 
 
 let inputvalue= ({
@@ -12,6 +15,8 @@ datos.push(inputvalue)
 console.log(JSON.stringify(datos))
 localStorage.setItem('caja',JSON.stringify(datos))
 
+
+document.getElementById('textotxt').value = ''
 render()
 }
 
@@ -20,15 +25,23 @@ function render(){
 
     let lista = document.getElementById('lista')
 
-    lista.innerHTML=''
+    lista.innerHTML=`
+    <table>
+    <thead>
+    <th>Lo que haremos hoy (:</th>
+    </thead>
+    </table>
+    `
 
     let datos = JSON.parse(localStorage.getItem('caja')) ?  JSON.parse(localStorage.getItem('caja')) : []
 
     datos.forEach((element,index) => {
         lista.innerHTML += `
-        <div>${element.texto}<div>
-        <button onclick="editar(${index})">Editar</button>
-        <button onclick="borrar(${index})">Borrar </button>
+
+        <td>${element.texto}<td>
+        <td> <button onclick="editar(${index})" class="btn btn-warning">Editar</button><td>
+        <td> <button onclick="borrar(${index})" class="btn btn-danger" >Borrar </button><td>
+        
         `
     });
 }
@@ -52,9 +65,9 @@ for(i=0; i <= datos.length; i++){
 
         let lista = document.getElementById('lista')
         lista.innerHTML=`
-        <div>${nombre}<div>
-        <button onclick="reguardar(${i})">Guardar</button>
-        <button onclick="salir(this)">Salir</button>
+        <td>${nombre}<td>
+        <td><button onclick="reguardar(${i})" class="btn btn-primary" >Guardar</button></td>
+        <td><button onclick="salir(this)"  class="btn btn-danger" >Salir</button></td>
         `
     }
 }
