@@ -44,10 +44,10 @@ function borrar(position){
 
 function editar(ps){
 let datos = JSON.parse(localStorage.getItem('caja')) ?  JSON.parse(localStorage.getItem('caja')) : []
-for(i=0; i<=datos.length; i++){
+for(i=0; i <= datos.length; i++){
     if(i == ps){
         document.getElementById('textotxt').value = datos[i].texto
-
+         
         let nombre = datos[i].texto
 
         let lista = document.getElementById('lista')
@@ -78,8 +78,9 @@ render()
 
 }
 
-function salir(){
-    
+function salir(e){
+    e.parentElement.remove();
+    render()
 }
 
 
